@@ -1,8 +1,8 @@
 class Particle {
-    constructor(c) {
+    constructor(c, size = 4) {
         this.x = random(width);
         this.y = random(height);
-        this.size = 4;
+        this.size = size;
         this.speed = 2;
         this.col = c;
     }
@@ -13,9 +13,9 @@ class Particle {
         this.y += cos(n * 4 * PI) * this.speed;
     }
 
-    display() {
+    display(size) {
         stroke(this.col);
-        strokeWeight(this.size);
+        strokeWeight(size);
         point(this.x, this.y);
     }
 }
