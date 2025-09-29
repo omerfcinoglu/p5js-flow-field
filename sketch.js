@@ -1,5 +1,5 @@
 let particles = [];
-let particleCount = 8000;
+let particleCount = 4000;
 let currentColor;
 let manager;
 
@@ -20,6 +20,7 @@ function setup() {
 }
 
 function draw() {
+  filter(BLUR, 3);
   if (manager.state === "idle") {
     for (let p of particles) {
       p.move();
@@ -46,7 +47,9 @@ function initParticles() {
   particles = [];
   let hueVal = random(0, 360);
   currentColor = color(hueVal, 80, 100, 0.02);
+  particleCount = int(random(2000, 9000));
+  let multp = random(1, 4);
   for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle(currentColor));
+    particles.push(new Particle(currentColor, multp));
   }
 }
