@@ -70,12 +70,12 @@ function initParticles() {
 }
 
 function windowResized() {
-  noLoop(); // resize olurken animasyon dursun
+  noLoop();
   background(0);
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
     resizeCanvas(windowWidth, windowHeight);
-    manager.clearBackground(); // sahneyi temizle
-    loop(); // resize bitince tekrar başlat
-  }, 250); // 250ms içinde başka resize olmazsa çalışır
+    manager.clearBackground();
+    loop();
+  }, 250);
 }
