@@ -2,6 +2,7 @@ let particles = [];
 let particleCount = 4000;
 let currentColor;
 let manager;
+const MAX_PARTICLES = 9000;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -14,6 +15,10 @@ function setup() {
     backgroundColor: [0, 0.05],
   });
 
+  for (let i = 0; i < MAX_PARTICLES; i++) {
+    particles.push(new Particle());
+  }
+
   manager.clearBackground();
   initParticles();
   background(0);
@@ -21,6 +26,7 @@ function setup() {
 
 function draw() {
   filter(BLUR, 3);
+
   if (manager.state === "idle") {
     for (let p of particles) {
       p.move();
@@ -44,12 +50,19 @@ function draw() {
 }
 
 function initParticles() {
-  particles = [];
-  let hueVal = random(0, 360);
-  currentColor = color(hueVal, 80, 100, 0.02);
-  particleCount = int(random(2000, 9000));
+  for (let p of particles) {
+    p.active = false;
+  }
+
+  particleCount = int(random(2000, MAX_PARTICLES));
   let multp = random(1, 4);
+
+  let r = random(0, 255);
+  let g = random(0, 255);
+  let b = random(0, 255);
+  currentColor = color(r, g, b, 0.02);
+
   for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle(currentColor, multp));
+    particles[i].reset(currentColor, multp);
   }
 }
