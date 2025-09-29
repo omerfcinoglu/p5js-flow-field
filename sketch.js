@@ -2,6 +2,8 @@ let particles = [];
 let particleCount = 4000;
 let currentColor;
 let manager;
+let resizeTimer;
+
 const MAX_PARTICLES = 9000;
 
 function setup() {
@@ -65,4 +67,15 @@ function initParticles() {
   for (let i = 0; i < particleCount; i++) {
     particles[i].reset(currentColor, multp);
   }
+}
+
+function windowResized() {
+  noLoop(); // resize olurken animasyon dursun
+  background(0);
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    resizeCanvas(windowWidth, windowHeight);
+    manager.clearBackground(); // sahneyi temizle
+    loop(); // resize bitince tekrar başlat
+  }, 250); // 250ms içinde başka resize olmazsa çalışır
 }
